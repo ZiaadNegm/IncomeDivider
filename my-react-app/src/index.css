@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+    .main-box {
+        @apply block w-full h-full  bg-blue-400 text-white p-4 rounded;
+    }
+
+    .center-container {
+        @apply grid  h-screen items-center justify-center;
+    }
+}
