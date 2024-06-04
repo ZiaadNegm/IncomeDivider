@@ -3,12 +3,19 @@
 @tailwind utilities;
 
 
+
 @layer components {
-    .main-box {
-        @apply block w-full h-full  bg-blue-400 text-white p-4 rounded;
+    /* .main-box {
+        @apply block w-full h-full  bg-blue-400 text-white p-4 rounded ;
     }
 
     .center-container {
-        @apply grid  h-screen items-center justify-center;
+        @apply grid  h-screen items-center justify-center -m-10;
+    } */
+    .input {
+        @apply  border-blue-300 border-2 p-2; 
+    }
+    .Center {
+        @apply grid space-y-12 place-content-center h-screen
     }
 }
