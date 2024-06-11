@@ -3,7 +3,9 @@ import Input_container from './input_container'
 
 function App() {
   return(
+    <div>
     <Input_container />
+    </div>
     
   )
 }
