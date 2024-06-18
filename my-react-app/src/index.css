@@ -5,17 +5,13 @@
 
 
 @layer components {
-    /* .main-box {
-        @apply block w-full h-full  bg-blue-400 text-white p-4 rounded ;
+    .main{
+        @apply Center flex flex-row justify-center items-center min-h-screen;
     }
-
-    .center-container {
-        @apply grid  h-screen items-center justify-center -m-10;
-    } */
     .input {
         @apply  border-blue-300 border-2 p-2; 
     }
-    .Center {
-        @apply grid space-y-12 place-content-center h-screen
+    .Center {   
+        @apply flex flex-col gap-y-12 gap-x-16;
     }
 }

@@ -1,30 +1,15 @@
-import './App.css'
-import Input_container from './input_container'
+import './App.css';
+import Input_container from './input_container';
 
 function App() {
-  return(
-    <div>
-    <Input_container />
+  const information = ["Inkomsten", "Boodschappen", "Dierenvoeding", "Activiteiten", "Gokken", "NVIDIA", "SOLONA"];
+
+  return (
+    <div className="main">
+      <Input_container information={information} />
+      <Input_container information={information}/>
     </div>
-    
-  )
+  );
 }
 
-// function App() {
-//   return (
-//     <div className ="center-container">
-//             <input className="input" name="myInput" />
-//             <input className="input" name="myInput" />
-//             <input className="input" name="myInput" />
-//             <input className="input" name="myInput" />
-//     <label>
-//           </label>
-//     <div className="main-box">
-//       <p>haiiiiii</p>
-
-//     </div>
-//     </div>
-//   )
-// }
-
-export default App
+export default App;
