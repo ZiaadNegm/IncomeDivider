@@ -1,11 +1,12 @@
 // https://zod.dev/
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import add from "../../images/icons8-plus-50.png";
 
 interface InputContainerProps {
   information: string[];
   color: boolean;
+  storageKey: string;
 }
 
 /* 
@@ -15,8 +16,17 @@ interface InputContainerProps {
 const InputContainer: React.FC<InputContainerProps> = ({
   information,
   color,
+  storageKey,
 }) => {
-  const [inputValue, setInputValue] = useState<string[]>(information);
+  const [inputValue, setInputValue] = useState<string[]>(() => {
+    const savedInput = localStorage.getItem(storageKey);
+    return savedInput ? JSON.parse(savedInput) : information;
+  });
+
+  useEffect(() => {
+    localStorage.setItem(storageKey, JSON.stringify(inputValue));
+    console.log(inputValue);
+  }, [inputValue, storageKey]);
 
   /*
     Updates the input values displayed with the new input.

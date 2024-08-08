@@ -30,4 +30,8 @@
   .addIconPicture {
     @apply w-12 h-auto;
   }
+  
+  .clearButton {
+    @apply absolute bottom-0 left-0 bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-16 text-lg rounded-full;
+  }
 }
