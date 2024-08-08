@@ -1,56 +1,88 @@
-//https://zod.dev/
+// https://zod.dev/
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import add from "../../images/icons8-plus-50.png";
 
 interface InputContainerProps {
   information: string[];
+  color: boolean;
 }
 
+/* 
+  InputValue: Array of states responsible for the input.
+  InputContainer: Main exportable function which allows input to be put in.
+*/
+const InputContainer: React.FC<InputContainerProps> = ({
+  information,
+  color,
+}) => {
+  const [inputValue, setInputValue] = useState<string[]>(information);
 
-export default function Input_container ({information}: InputContainerProps){ // Maak de schets na zodat je twee rows hebt, eentje met positief en negatief
-  // zorg ervoor dat de code straks reusable is+
-  const inputs = Array(information.length).fill(null);
-  const [inputValue, setInputValue] = useState(information); // array maken van states
-  
-  // Typescript code. Wees specifiek wat voor soort event je krijgt door het aan te geven.
-  // 
-function handleChange(event: React.ChangeEvent<HTMLInputElement>, index: number) { 
+  /*
+    Updates the input values displayed with the new input.
+  */
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
     const newInputValues = [...inputValue];
-    newInputValues[index] = event.target.value
+    newInputValues[index] = event.target.value;
     setInputValue(newInputValues);
-}
+  };
 
-// Zorgt ervoor dat na een click en geen input, en weer een defocus van de box,
-// de box weer wordt bijgevuld met de originele informatie.
-// Index: index van de box
-function handleBlur(index: number) {
-  return () => {
+  /*
+    Ensures that the box is properly focused and refreshes the box with 
+    the new information.
+
+    Index: The index of the box.
+  */
+  const handleBlur = (index: number) => () => {
     const newInputValues = [...inputValue];
-    if (newInputValues[index] === '') {
+    if (newInputValues[index] === "") {
       newInputValues[index] = information[index];
     }
     setInputValue(newInputValues);
   };
-}
 
-  function resetInput(index: number){
-    const newInputValues = [...inputValue]
-    newInputValues[index] = "";
-    setInputValue(newInputValues);
-  }
+  /*
+    Adds new boxes so that new input can be added in.
+  */
+  const addInput = () => {
+    setInputValue([...inputValue, ""]);
+  };
 
-    return(
-      <div className="Center">
-        {inputs.map((_, index) => (
-          <input 
-            key={index}
-            className="input" 
-            value={inputValue[index]} 
-            style={{color: inputValue[index] === information[index] ? 'lightgray': 'black'}}
-            onClick={() => resetInput(index)}  // als er een click is, dan call resetInput met de input
-            onChange={(event) => handleChange(event, index)} // 
-            onBlur={handleBlur(index)}
-          />
-        ))}
-    </div> )
-}
+  return (
+    <div className="Center">
+      {inputValue.map((value, index) => (
+        <input
+          key={index}
+          className="input"
+          value={value}
+          style={{
+            color: value === information[index] ? "lightgray" : "black",
+            borderColor: color ? "green" : "red",
+          }}
+          onClick={() =>
+            setInputValue((prev) => {
+              const newInputValues = [...prev];
+              newInputValues[index] = "";
+              return newInputValues;
+            })
+          }
+          onChange={(event) => handleChange(event, index)}
+          onBlur={handleBlur(index)}
+        />
+      ))}
+      <div className="AddIcon">
+        <img
+          src={add}
+          className="addIconPicture"
+          onClick={addInput}
+          alt="Add input"
+        />
+      </div>
+    </div>
+  );
+};
+
+export default InputContainer;

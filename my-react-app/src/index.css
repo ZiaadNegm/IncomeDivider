@@ -2,16 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 @layer components {
-    .main{
-        @apply Center flex flex-row justify-center items-center min-h-screen;
-    }
-    .input {
-        @apply  border-blue-300 border-2 p-2; 
-    }
-    .Center {   
-        @apply flex flex-col gap-y-12 gap-x-16;
-    }
+  .wrapper {
+    @apply flex justify-center items-center h-screen relative;
+  }
+
+  .main {
+    @apply flex;
+  }
+
+  .input {
+    @apply border-blue-300 border-2 p-2 my-3 mx-2;
+  }
+
+  .Center {
+    @apply flex flex-col;
+  }
+
+  .AddIcon {
+    @apply flex justify-center;
+  }
+
+  .submitButton {
+    @apply absolute bottom-0 right-0 bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-16 text-lg rounded-full;
+  }
+
+  .addIconPicture {
+    @apply w-12 h-auto;
+  }
 }
