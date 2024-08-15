@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from "react";
 import "./App.css";
 import InputContainer from "./input_container";
-import handleClear from "./handleClear";
 
 function App() {
   const initialInkomsten = [
@@ -10,10 +9,10 @@ function App() {
     "Dierenvoeding",
     "Activiteiten",
     "Gokken",
-  ]; 
+  ];
   const initialUitgaven = [
-    "Inkomsten",
-    "Boodschappen",
+    "Uigaven",
+    "Kleren",
     "Dierenvoeding",
     "Spelen",
     "Gokken",
@@ -25,6 +24,13 @@ function App() {
   const groen = true;
   const rood = false;
 
+  const handleClear = () => {
+    localStorage.removeItem("Inkomsten");
+    localStorage.removeItem("Uitgaven");
+    setInkomsten([...initialInkomsten]); // Reset inkomsten to initial state
+    setUitgaven([...initialUitgaven]); // Reset uitgaven to initial state
+  };
+
   return (
     <div>
       <div className="wrapper">
@@ -33,11 +39,13 @@ function App() {
             information={inkomsten}
             color={groen}
             storageKey="Inkomsten"
+            onClear={handleClear}
           />
           <InputContainer
             information={uitgaven}
             color={rood}
-            storageKey="Uitkomsten"
+            storageKey="Uitgaven"
+            onClear={handleClear}
           />
         </div>
       </div>
@@ -45,14 +53,8 @@ function App() {
         <button className="submitButton" type="button">
           Submit
         </button>
-      </div>
-      <div>
-        <button
-          className="clearButton"
-          type="button"
-          onClick={() => handleClear(setInkomsten, setUitgaven, initialInkomsten, initialUitgaven)}
-        >
-          Clear
+        <button className="clearButton" type="button" onClick={handleClear}>
+          Clear All
         </button>
       </div>
     </div>

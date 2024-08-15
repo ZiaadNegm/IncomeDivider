@@ -1,5 +1,3 @@
-// https://zod.dev/
-
 import React, { useEffect, useState } from "react";
 import add from "../../images/icons8-plus-50.png";
 
@@ -7,30 +5,26 @@ interface InputContainerProps {
   information: string[];
   color: boolean;
   storageKey: string;
+  onClear: () => void;
 }
 
-/* 
-  InputValue: Array of states responsible for the input.
-  InputContainer: Main exportable function which allows input to be put in.
-*/
 const InputContainer: React.FC<InputContainerProps> = ({
-  information,
+  information,  
   color,
   storageKey,
+  onClear,
 }) => {
   const [inputValue, setInputValue] = useState<string[]>(() => {
     const savedInput = localStorage.getItem(storageKey);
     return savedInput ? JSON.parse(savedInput) : information;
   });
 
+  // Update inputValue when information prop changes
   useEffect(() => {
-    localStorage.setItem(storageKey, JSON.stringify(inputValue));
-    console.log(inputValue);
-  }, [inputValue, storageKey]);
+    setInputValue(information);
+    localStorage.setItem(storageKey, JSON.stringify(information));
+  }, [information, storageKey]);
 
-  /*
-    Updates the input values displayed with the new input.
-  */
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     index: number
@@ -40,12 +34,6 @@ const InputContainer: React.FC<InputContainerProps> = ({
     setInputValue(newInputValues);
   };
 
-  /*
-    Ensures that the box is properly focused and refreshes the box with 
-    the new information.
-
-    Index: The index of the box.
-  */
   const handleBlur = (index: number) => () => {
     const newInputValues = [...inputValue];
     if (newInputValues[index] === "") {
@@ -54,9 +42,6 @@ const InputContainer: React.FC<InputContainerProps> = ({
     setInputValue(newInputValues);
   };
 
-  /*
-    Adds new boxes so that new input can be added in.
-  */
   const addInput = () => {
     setInputValue([...inputValue, ""]);
   };
@@ -91,6 +76,9 @@ const InputContainer: React.FC<InputContainerProps> = ({
           alt="Add input"
         />
       </div>
+      <button className="clearButton" type="button" onClick={onClear}>
+        clear
+      </button>
     </div>
   );
 };
