@@ -50,9 +50,11 @@ function App() {
         </div>
       </div>
       <div>
-        <button className="submitButton" type="button">
-          Submit
-        </button>
+        <a href="test.html">
+          <button className="submitButton" type="button">
+            Submit
+          </button>
+        </a>
         <button className="clearButton" type="button" onClick={handleClear}>
           Clear All
         </button>
