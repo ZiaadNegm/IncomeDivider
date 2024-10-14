@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import InputContainer from "./input_container";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   const initialInkomsten = [
@@ -11,7 +12,7 @@ function App() {
     "Gokken",
   ];
   const initialUitgaven = [
-    "Uigaven",
+    "Uitgaven",
     "Kleren",
     "Dierenvoeding",
     "Spelen",
@@ -21,18 +22,18 @@ function App() {
   const [inkomsten, setInkomsten] = useState(initialInkomsten);
   const [uitgaven, setUitgaven] = useState(initialUitgaven);
 
-  const groen = true;
-  const rood = false;
-
   const handleClear = () => {
     localStorage.removeItem("Inkomsten");
     localStorage.removeItem("Uitgaven");
-    setInkomsten([...initialInkomsten]); // Reset inkomsten to initial state
-    setUitgaven([...initialUitgaven]); // Reset uitgaven to initial state
+    setInkomsten([...initialInkomsten]);
+    setUitgaven([...initialUitgaven]);
   };
 
+  const groen = true;
+  const rood = false;
+
   return (
-    <div>
+    <Router>
       <div className="wrapper">
         <div className="main">
           <InputContainer
@@ -48,18 +49,14 @@ function App() {
             onClear={handleClear}
           />
         </div>
-      </div>
-      <div>
-        <a href="test.html">
-          <button className="submitButton" type="button">
-            Submit
-          </button>
-        </a>
         <button className="clearButton" type="button" onClick={handleClear}>
           Clear All
         </button>
       </div>
-    </div>
+      <Routes>
+        <Route path="/" element={<div>Welcome to the main page!</div>} />
+      </Routes>
+    </Router>
   );
 }
 
