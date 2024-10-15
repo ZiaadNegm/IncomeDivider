@@ -1,7 +1,8 @@
 import { useState } from "react";
-import "./App.css";
-import InputContainer from "./input_container";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./App.css";
+import MainPage from "./mainpage";
+import Quant from "./quant";
 
 function App() {
   const initialInkomsten = [
@@ -18,7 +19,6 @@ function App() {
     "Spelen",
     "Gokken",
   ];
-
   const [inkomsten, setInkomsten] = useState(initialInkomsten);
   const [uitgaven, setUitgaven] = useState(initialUitgaven);
 
@@ -29,32 +29,20 @@ function App() {
     setUitgaven([...initialUitgaven]);
   };
 
-  const groen = true;
-  const rood = false;
-
   return (
     <Router>
-      <div className="wrapper">
-        <div className="main">
-          <InputContainer
-            information={inkomsten}
-            color={groen}
-            storageKey="Inkomsten"
-            onClear={handleClear}
-          />
-          <InputContainer
-            information={uitgaven}
-            color={rood}
-            storageKey="Uitgaven"
-            onClear={handleClear}
-          />
-        </div>
-        <button className="clearButton" type="button" onClick={handleClear}>
-          Clear All
-        </button>
-      </div>
       <Routes>
-        <Route path="/" element={<div>Welcome to the main page!</div>} />
+        <Route 
+          path="/" 
+          element={
+            <MainPage 
+              inkomsten={inkomsten} 
+              uitgaven={uitgaven} 
+              handleClear={handleClear} 
+            />
+          } 
+        />
+        <Route path="/quant" element={<Quant />} />
       </Routes>
     </Router>
   );

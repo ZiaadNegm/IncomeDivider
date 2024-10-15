@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer components {
+
+  .text-expense{
+    @apply flex-col
+  }
+  
   .wrapper {
     @apply flex justify-center items-center h-screen relative;
   }
@@ -23,6 +28,9 @@
     @apply flex justify-center;
   }
 
+  .text{
+    @apply text-center p-7 text-4xl max-w-xl mx-auto w-full;
+  }
   .submitButton {
     @apply absolute bottom-0 right-0 bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-16 text-lg rounded-full;
   }
